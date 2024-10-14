@@ -6,7 +6,7 @@ import { GetServerSidePropsContext } from "next";
 import WeatherData from "@/interfaces/weather";
 import Image from "next/image";
 
-let Cities = cities as CityData[]
+const Cities = cities as CityData[]
 export async function getServerSideProps(context: GetServerSidePropsContext){
     const { city_id } = context.query
 
@@ -15,7 +15,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext){
     if(!city){
         throw new Error("City not found");
     }
-    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${city.coord.lat}&lon=${city.coord.lon}&appid=${process.env.WEATHER_API_KEY}&exclude=minutely&units=metric`
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${city.coord.lat}&lon=${city.coord.lon}&appid=${process.env.WEATHER_API_KEY}&exclude=minutely&units=metric`
 
     const res = await fetch(url);
     const weatherData: WeatherData = await res.json();
@@ -34,7 +34,7 @@ type Props = {
     city: CityData
     weather: WeatherData
 }
-export default function({ city, weather }: Props) {
+export default function CitiesComponent({ city, weather }: Props) {
     const iconUrl = `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`
     return (
         <>

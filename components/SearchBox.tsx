@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 const MIN_CITY_CHARS = 3
 
 let timeoutId: ReturnType<typeof setTimeout>;
-const debounce = (fn: Function, ms = 300) => {
+const debounce = (fn: (...args: any[]) => void, ms = 300) => {
     return function (this: any,...args: any[]) {
         clearTimeout(timeoutId);
         timeoutId = setTimeout(() => fn.apply(this,args),ms);
